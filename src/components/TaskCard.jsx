@@ -1,9 +1,19 @@
-import React from "react";
+
+import { useTaskStore } from "../hooks/useTaskStore";
 
 export const TaskCard = ({ singleTask }) => {
-  const { taskName, comments } = singleTask;
+
+  const { taskName, comments, _id } = singleTask;
+
+  const {startDeletingTask} = useTaskStore()
+
+  const handleDelete = (id) => {
+    startDeletingTask(id);
+  }
+
+
   return (
-    <div className="card p-3">
+    <div className="card p-3 mb-3">
       <div className=" d-flex justify-content-between">
         <div className="text-group p-1">
           <h5>{taskName}</h5>
@@ -12,19 +22,17 @@ export const TaskCard = ({ singleTask }) => {
 
         <div className="btn-group  d-flex justify-content-between h-100">
           <div>
-            {" "}
-            <button className="btn btn-danger">Delete</button>
+
+            <button className="btn btn-danger" onClick={()=>handleDelete(_id)}>Delete</button>
           </div>
-          <div>
-            {" "}
+
             <button className="btn btn-primary">Edit</button>
           </div>
           <div>
-            {" "}
+
             <button className="btn btn-dark">Completed</button>
           </div>
         </div>
       </div>
-    </div>
-  );
+  )
 };

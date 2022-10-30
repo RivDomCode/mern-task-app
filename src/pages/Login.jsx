@@ -8,11 +8,11 @@ export const Login = () => {
         <h2 className='text-center text-dark'>Login</h2>
         <div className="form-floating mb-3 justify-content-center">
           <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" />
-          <label for="floatingInput">Email address</label>
+          <label htmlFor="floatingInput">Email address</label>
         </div>
         <div className="form-floating">
           <input type="password" className="form-control" id="floatingPassword" placeholder="Password" />
-          <label for="floatingPassword">Password</label>
+          <label htmlFor="floatingPassword">Password</label>
         </div>
         <button className='btn btn-outline-dark w-100 mt-3 text-uppercase fw-bold'>Log In</button>
       </form>
@@ -20,15 +20,15 @@ export const Login = () => {
         <h2 className='text-center text-dark'>Register</h2>
         <div className="form-floating mb-3 ">
           <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" />
-          <label for="floatingInput">Email address</label>
+          <label htmlFor="floatingInput">Email address</label>
         </div>
         <div className="form-floating mb-3">
           <input type="password" className="form-control" id="floatingPassword" placeholder="Password" />
-          <label for="floatingPassword">Password</label>
+          <label htmlFor="floatingPassword">Password</label>
         </div>
         <div className="form-floating mb-3">
           <input type="password" className="form-control" id="floatingPassword" placeholder="Password" />
-          <label for="floatingPassword">Repeat Password</label>
+          <label htmlFor="floatingPassword">Repeat Password</label>
         </div>
         <button className='btn btn-outline-dark w-100 mt-3 text-uppercase fw-bold'>REgister</button>
       </form>

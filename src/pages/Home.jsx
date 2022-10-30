@@ -1,8 +1,6 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { TaskCard } from "../components/taskCard";
 import { useForm } from "../hooks/useForm";
-import { addTask } from "../store/tasks/taskSlice";
+import { useTaskStore } from "../hooks/useTaskStore";
 
 const initialForm = {
   taskName:"",
@@ -12,18 +10,18 @@ const initialForm = {
 
 export const Home = () => {
 
-  const { inputValues, reset, handleInputChange } = useForm(initialForm);
+  const { inputValues, resetForm, handleInputChange } = useForm(initialForm);
   const { taskName, comments } = inputValues;
 
-  const tasks = useSelector(state => state.tasks.taskList);
-  const dispatch = useDispatch();
+  const {tasks, startSavingTask } = useTaskStore();
+  const { taskList } = tasks;
 
-  const handleSubmit = () =>{
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    dispatch(addTask({...inputValues, _id:new Date().getTime()}))
+    startSavingTask(inputValues);
+    resetForm();
   }
-
 
 
   return (
@@ -38,17 +36,17 @@ export const Home = () => {
         <h2 className='text-center text-dark mb-3'>Add your taks below</h2>
         <div className="form-floating mb-3 justify-content-center">
           <input type="text" className="form-control" id="floatingInput" value={taskName} name="taskName" onChange={handleInputChange}/>
-          <label for="floatingInput">Task</label>
+          <label htmlFor="floatingInput">Task</label>
         </div>
         <div className="form-floating">
           <textarea type="text" className="form-control" id="floatingPassword" value={comments} name="comments" onChange={handleInputChange}/>
-          <label for="floatingPassword">Comments</label>
+          <label htmlFor="floatingPassword">Comments</label>
         </div>
         <button className='btn btn-outline-dark w-100 mt-3 text-uppercase fw-bold'>Add to list</button>
       </form>
       <div className="p-4">
         {
-          tasks.map(singleTask => (
+          taskList.map(singleTask => (
             <TaskCard key={singleTask._id} singleTask={singleTask}/>
           ))
         }
