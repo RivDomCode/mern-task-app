@@ -5,12 +5,11 @@ export const TaskCard = ({ singleTask }) => {
 
   const { taskName, comments, _id } = singleTask;
 
-  const {startDeletingTask} = useTaskStore()
+  const {startDeletingTask, startSavingTask} = useTaskStore()
 
   const handleDelete = (id) => {
     startDeletingTask(id);
   }
-
 
   return (
     <div className="card p-3 mb-3">
@@ -26,7 +25,7 @@ export const TaskCard = ({ singleTask }) => {
             <button className="btn btn-danger" onClick={()=>handleDelete(_id)}>Delete</button>
           </div>
 
-            <button className="btn btn-primary">Edit</button>
+            <button className="btn btn-primary" >Edit</button>
           </div>
           <div>
 

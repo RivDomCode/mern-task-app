@@ -22,6 +22,15 @@ export const taskSlice = createSlice({
         addTask: (state, { payload }) => {
             state.taskList.push(payload)
         },
+        updateTask: (state, {payload}) =>{
+            state.taskList = state.taskList(task => {
+                if(task._id === payload._id){
+                    return payload
+                }
+
+                return task
+            })
+        },
         deleteTask: (state, { payload })=> {
            state.taskList = state.taskList.filter(task => task._id !== payload);
           }
@@ -32,4 +41,4 @@ export const taskSlice = createSlice({
 
 export default taskSlice;
 
-export const { addTask, deleteTask, taskList } = taskSlice.actions;
+export const { addTask, deleteTask, updateTask, taskList } = taskSlice.actions;

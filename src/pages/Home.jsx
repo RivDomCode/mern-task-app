@@ -19,9 +19,16 @@ export const Home = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if( taskName.length <= 2 ) {
+      alert("task field is requiered");
+      return
+    }
     startSavingTask(inputValues);
     resetForm();
   }
+
+
+
 
 
   return (
@@ -47,7 +54,7 @@ export const Home = () => {
       <div className="p-4">
         {
           taskList.map(singleTask => (
-            <TaskCard key={singleTask._id} singleTask={singleTask}/>
+            <TaskCard key={singleTask._id} singleTask={singleTask} handleUpdate={handleUpdate}/>
           ))
         }
       </div>

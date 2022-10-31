@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { addTask, deleteTask } from "../store/tasks/taskSlice"
+import { addTask, deleteTask, updateTask } from "../store/tasks/taskSlice"
 
 export const useTaskStore = () => {
 
@@ -8,6 +8,9 @@ export const useTaskStore = () => {
     const dispatch = useDispatch()
 
     const startSavingTask = async(task) => {
+        if(task._id) {
+            dispatch(updateTask({...task}))
+        }
         dispatch(addTask({...task, _id: new Date().getTime()}))
     }
 
