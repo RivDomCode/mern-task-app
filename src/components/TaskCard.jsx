@@ -11,7 +11,6 @@ export const TaskCard = ({ singleTask }) => {
 
   const handleActive = (singleTask) => {
     setTaskActive(singleTask);
-    console.log(singleTask);
   };
 
   return (
