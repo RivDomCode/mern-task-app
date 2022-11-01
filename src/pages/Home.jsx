@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import { TaskCard } from "../components/taskCard";
 import { useForm } from "../hooks/useForm";
 import { useTaskStore } from "../hooks/useTaskStore";
+import { activeTask } from "../store/tasks/taskSlice";
 
 const initialForm = {
   taskName:"",
@@ -10,11 +12,17 @@ const initialForm = {
 
 export const Home = () => {
 
-  const { inputValues, resetForm, handleInputChange } = useForm(initialForm);
+  const {setInputValues, inputValues, resetForm, handleInputChange } = useForm(initialForm);
   const { taskName, comments } = inputValues;
+  const {taskList, startSavingTask, activeTask } = useTaskStore();
 
-  const {tasks, startSavingTask } = useTaskStore();
-  const { taskList } = tasks;
+
+  useEffect(()=>{
+    if (activeTask !== null){
+      setInputValues({...activeTask})
+    }
+  }, [activeTask])
+
 
 
   const handleSubmit = (e) => {
@@ -54,7 +62,7 @@ export const Home = () => {
       <div className="p-4">
         {
           taskList.map(singleTask => (
-            <TaskCard key={singleTask._id} singleTask={singleTask} handleUpdate={handleUpdate}/>
+            <TaskCard key={singleTask._id} singleTask={singleTask} />
           ))
         }
       </div>

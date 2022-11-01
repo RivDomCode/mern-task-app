@@ -1,15 +1,18 @@
-
 import { useTaskStore } from "../hooks/useTaskStore";
 
 export const TaskCard = ({ singleTask }) => {
-
   const { taskName, comments, _id } = singleTask;
 
-  const {startDeletingTask, startSavingTask} = useTaskStore()
+  const { startDeletingTask, setTaskActive } = useTaskStore();
 
   const handleDelete = (id) => {
     startDeletingTask(id);
-  }
+  };
+
+  const handleActive = (singleTask) => {
+    setTaskActive(singleTask);
+    console.log(singleTask);
+  };
 
   return (
     <div className="card p-3 mb-3">
@@ -21,17 +24,25 @@ export const TaskCard = ({ singleTask }) => {
 
         <div className="btn-group  d-flex justify-content-between h-100">
           <div>
-
-            <button className="btn btn-danger" onClick={()=>handleDelete(_id)}>Delete</button>
+            <button
+              className="btn btn-danger"
+              onClick={() => handleDelete(_id)}
+            >
+              Delete
+            </button>
           </div>
 
-            <button className="btn btn-primary" >Edit</button>
-          </div>
-          <div>
-
-            <button className="btn btn-dark">Completed</button>
-          </div>
+          <button
+            className="btn btn-primary"
+            onClick={() => handleActive(singleTask)}
+          >
+            Edit
+          </button>
+        </div>
+        <div>
+          <button className="btn btn-dark">Completed</button>
         </div>
       </div>
-  )
+    </div>
+  );
 };
