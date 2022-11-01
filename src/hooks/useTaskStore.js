@@ -11,8 +11,10 @@ export const useTaskStore = () => {
     const startSavingTask = async(task) => {
         if(task._id) {
             dispatch(updateTask({...task}))
+        } else {
+            dispatch(addTask({...task, _id: new Date().getTime()}))
+
         }
-        dispatch(addTask({...task, _id: new Date().getTime()}))
     }
 
     const startDeletingTask =async(id) => {
@@ -32,6 +34,6 @@ export const useTaskStore = () => {
         //methods
         startSavingTask,
         startDeletingTask,
-        setTaskActive
+        setTaskActive,
     }
 }
